@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: User-Microservice
+
+  datasource:
+    url: ${USER_DB_URL}
+    username: ${USER_DB_NAME}
+    password: ${USER_DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
