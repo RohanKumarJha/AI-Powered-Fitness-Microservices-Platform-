@@ -2,6 +2,7 @@ package com.fitness.service.impl;
 
 import com.fitness.dto.request.ActivityRequest;
 import com.fitness.dto.response.ActivityResponse;
+import com.fitness.exception.ResourceNotFoundException;
 import com.fitness.model.Activity;
 import com.fitness.repository.ActivityRepository;
 import com.fitness.service.ActivityService;
@@ -13,8 +14,13 @@ import org.springframework.stereotype.Service;
 public class ActivityServiceImpl implements ActivityService {
 
     private final ActivityRepository activityRepository;
+    private final UserValidationService userValidationService;
 
     public ActivityResponse trackActivity(ActivityRequest request) {
+        if (!userValidationService.validateUser(request.getUserId())) {
+            throw new ResourceNotFoundException(
+                    "User not exist with userId : "+request.getUserId());
+        }
         Activity activity = Activity.builder()
                 .userId(request.getUserId())
                 .duration(request.getDuration())

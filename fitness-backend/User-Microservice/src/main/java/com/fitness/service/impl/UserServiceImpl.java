@@ -36,4 +36,9 @@ public class UserServiceImpl implements UserService {
                         "User not found with userId : "+userId));
         return modelMapper.map(user, UserResponse.class);
     }
+
+    @Override
+    public boolean validateUser(String userId) {
+        return userRepository.existsById(userId);
+    }
 }

@@ -6,4 +6,5 @@ import com.fitness.dto.response.UserResponse;
 public interface UserService {
     UserResponse register(UserRequest userRequest);
     UserResponse getUserProfile(String userId);
+    boolean validateUser(String userId);
 }
